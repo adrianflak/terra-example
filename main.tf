@@ -1,42 +1,28 @@
-# Set the required provider and versions
-terraform {
-  required_providers {
-    # We recommend pinning to the specific version of the Docker Provider you're using
-    # since new versions are released frequently
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = "~> 3.0"
-    }
+provider "ssh" {
+    host = var.host
+    username = var.username
+    private.key = file(var.private_key_path)
+}
+
+
+resource "null_resource" "nginx_container" {
+  provisioner "remote-exec" {
+    inline = [
+        "docker pull nginx:latest",
+        "docker run -d --name nginx-server 80:80 nginx-latest"
+    ]
+  } 
+  connection {
+    type = "ssh"
+    host = var.host
+    user = var.username
+    private_key = file(var.private_key_path)
   }
+ 
 }
 
-# Configure the docker provider
-provider "docker" {
- # host = "ssh://adrian@20.215.225.197" 
-   host = "tcp://20.215.225.197:2377"
 
-}
+variable "host" {}
+variable "username" {}
+variable "private_key_path" {}
 
-variable "docker_password" {
-  type = string
-  sensitive = true
-}
-
-# Create a docker image resource
-# -> docker pull nginx:latest
-resource "docker_image" "nginx" {
-  name         = "nginx:latest"
-  keep_locally = true
-}
-
-# Create a docker container resource
-# -> same as 'docker run --name nginx -p8080:80 -d nginx:latest'
-resource "docker_container" "nginx" {
-  name    = "nginx"
-  image   = docker_image.nginx.image_id
-
-  ports {
-    external = 8080
-    internal = 80
-  }
-}
