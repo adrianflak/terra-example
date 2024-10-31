@@ -19,5 +19,5 @@ jobs:
       - name: Apply Terraform
         run: terraform apply -auto-approve
         env: 
-            DOCKER_HOST: "ssh://adrian@20.215.225.197"
+            DOCKER_HOST: "ssh://adrian@20.215.225.197:22"
             DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
