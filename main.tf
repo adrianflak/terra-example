@@ -2,7 +2,7 @@ terraform {
     required_providers {
       docker = {
         source = "kreuzwerker/docker",
-        vesrion = "~>2.0"
+        version = "~>2.0"
       }
     }
 }
