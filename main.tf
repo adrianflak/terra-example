@@ -10,7 +10,7 @@ terraform {
   }
 }
 
-provider "ssh" {
+provider "ssh_resource" {
     host = var.host
     username = var.username
     private_key = file(var.private_key_path)
