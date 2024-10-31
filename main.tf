@@ -10,14 +10,14 @@ terraform {
   }
 }
 
-provider "ssh_resource" {
+resource "ssh_resource" {
     host = var.host
     username = var.username
     private_key = file(var.private_key_path)
 }
 
 
-resource "null_resource" "nginx_container" {
+resource "nginx_container" {
   provisioner "remote-exec" {
     inline = [
         "docker pull nginx:latest",
