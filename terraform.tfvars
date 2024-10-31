@@ -1,1 +1,3 @@
-docker_password: "Ernabo1234#*"
+
+    docker_password = "Ernabo1234#*"
+

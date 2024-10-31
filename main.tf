@@ -15,6 +15,7 @@ provider "docker" {
   host = "ssh://adrian@20.215.225.197"
   password = var.docker_password
 }
+
 variable "docker_password" {
   type = string
   sensitive = true
