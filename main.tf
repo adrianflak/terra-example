@@ -12,11 +12,7 @@ terraform {
 
 # Configure the docker provider
 provider "docker" {
-  host = "ssh://adrian@20.215.225.197"
-  passphrase = var.docker_password
-  ssh {
-    config_path = "~/.ssh/config" 
-  }
+  host = "ssh://adrian@20.215.225.197" 
 }
 
 variable "docker_password" {
