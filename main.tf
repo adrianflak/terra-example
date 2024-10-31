@@ -13,7 +13,7 @@ terraform {
 provider "ssh" {
     host = var.host
     username = var.username
-    private.key = file(var.private_key_path)
+    private_key = file(var.private_key_path)
 }
 
 
